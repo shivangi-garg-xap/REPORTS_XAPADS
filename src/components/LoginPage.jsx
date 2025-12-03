@@ -6,8 +6,13 @@ import BtnLoader from '../assets/btn_loader.gif'
 import XapadsLogo from "../assets/XapadsLogo.svg"
 import axios from "axios";
 
+import { useAuth } from '../utils/AuthContext';
+
 export default function LoginPage() {
   const [form] = Form.useForm();
+  
+  const { login } = useAuth()
+
   const errSufix = (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="alert-triangle">
@@ -197,7 +202,9 @@ export default function LoginPage() {
 
           axios(config).then((response) => {
             if (response.status === 200) {
-                login(response.data.token, response.data.data);
+              console.log("response", response.data)
+                // login(response.data.token, response.data.data);
+                login("xxx1234567", response.data.results);
                 // setShowOTP(true)
                 // showToast('success', response.data.message)
             } else {

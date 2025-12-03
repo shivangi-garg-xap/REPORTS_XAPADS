@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage";
 import "./styles/main.scss";
 
 import Layout from "./components/Layout";
+import { useAuth } from './utils/AuthContext';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -14,7 +15,7 @@ function App() {
 
   const PublicRoute = ({ children }) => {
     const { isAuthenticated } = useAuth();
-    return isAuthenticated ? <Navigate to="/report" replace /> : children;
+    return isAuthenticated ? <Navigate to="/home" replace /> : children;
   }
 
   const Logout = () => {
@@ -23,12 +24,12 @@ function App() {
 
     return <Navigate to="/" replace />;
   };
-  
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<Layout />} />
+        <Route path="/" element={<PublicRoute><LoginPage /></PublicRoute>} />
+        <Route path="/home" element={<ProtectedRoute><Layout /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
