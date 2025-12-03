@@ -3,7 +3,6 @@ import { Row, Col, Form, Input, Button } from "antd";
 // import "./pages/login.scss";
 import BtnLoader from '../assets/btn_loader.gif'
 
-import "../styles/main.scss";
 import XapadsLogo from "../assets/XapadsLogo.svg"
 
 export default function LoginPage() {
