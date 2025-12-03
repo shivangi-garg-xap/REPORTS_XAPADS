@@ -354,10 +354,10 @@ export default function LoginPage() {
                   </Button>
                 </Form.Item>                 
               </Form>
-
             <p className="footer">
               Didn't receive the code?{" "}
-              {showResendOTP? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <span className='resend_otp_text'>Resend OTP in <small>{counterTime}</small></span>}
+              {showResendOTP? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <><span className='resend_otp_text'>Resend OTP in </span>
+              <span className="resend_otp_btn">{counterTime}</span></>}
             </p>            
             </>}
           </div>
