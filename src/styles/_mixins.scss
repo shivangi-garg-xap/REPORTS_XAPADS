@@ -1,0 +1,33 @@
+// Flexbox
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Custom scroll
+@mixin hide-scroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Gradient
+@mixin gradient-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(125, 177, 255, 0.8),
+    rgba(255, 205, 190, 0.8)
+  );
+}
+
+@mixin blurred-gradient-bg {
+  background: linear-gradient(180deg,
+      #b7dcff 0%,
+      #c6c4ff 25%,
+      #f8d3c1 50%,
+      #f0b3e8 75%,
+      #b887ff 100%
+  );
+}
+
