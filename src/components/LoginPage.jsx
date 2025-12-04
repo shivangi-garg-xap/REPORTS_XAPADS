@@ -308,7 +308,10 @@ export default function LoginPage() {
                 </div>
 
                 <Form.Item name="otp" label="Enter 6-digit code" validateStatus={otpErr ? 'error' : ''} help={otpErrMsg}>
-                  <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} status={otpErr ? 'error' : ''} />
+                  <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} status={otpErr ? 'error' : ''}  onPaste={(e) => {
+    const pasted = e.clipboardData.getData("text");
+    handleOTP(pasted);
+  }} />
                 </Form.Item>    
                 <Form.Item className='m-0'>
                   <Button block type="primary"
