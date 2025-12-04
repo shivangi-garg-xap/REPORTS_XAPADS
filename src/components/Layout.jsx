@@ -337,11 +337,12 @@ export default function ReportsLayout() {
         </div>
 
         <div className="view_data_div">
-          {/* <div className="empty-state">
+          {filteredData.length <=0 ? <div className="empty-state">
             <img src={GenerateReportIcon} alt="empty" className="img-fluid" />
             <h3>Generate a Report</h3>
             <p>Please select "Date" from above to <br /> generate the report.</p>
-          </div> */}
+          </div>
+          :
           <div className="tableFixHead">
             <div className="table_design custom_data_table">
               <Table columns={columns} dataSource={filteredData}
@@ -414,6 +415,7 @@ export default function ReportsLayout() {
               </div> */}
             </div>
           </div>
+}
         </div>
       </div>
     </div>
