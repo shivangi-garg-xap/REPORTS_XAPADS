@@ -4,9 +4,15 @@ import { Row, Col, Form, Input, Button } from "antd";
 import BtnLoader from '../assets/btn_loader.gif'
 
 import XapadsLogo from "../assets/XapadsLogo.svg"
+import axios from "axios";
+
+import { useAuth } from '../utils/AuthContext';
 
 export default function LoginPage() {
   const [form] = Form.useForm();
+  
+  const { login } = useAuth()
+
   const errSufix = (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="alert-triangle">
@@ -15,7 +21,7 @@ export default function LoginPage() {
       </svg>
   )
 
-  const [showOTP, setShowOTP] = useState(true)
+  const [showOTP, setShowOTP] = useState(false)
 
     // Validate Email From API On SigIn Button And Open OTP Screen
     const [showLoading, setShowLoading] = useState(false)
@@ -49,22 +55,22 @@ export default function LoginPage() {
             setEmailErrMsg("Email is required.")
           }
         } else {
-
-           setShowOTP(true)
-           return 0;
+          //  setShowOTP(true)
+          //  return 0;
             setShowLoading(true)
             const raw = JSON.stringify({
                 'email': email.toLowerCase()
             })
 
             const config = {
-                method: 'post',
-                maxBodyLength: Infinity,
-                url: `${import.meta.env.VITE_APP_API_URL}/signin`,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: raw
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: `${import.meta.env.VITE_APP_API_URL}/user/login`,
+              headers: {
+                'access-token': `${import.meta.env.VITE_APP_API_KEY}`,
+                'Content-Type': 'application/json'
+              },
+              data: raw
             };
 
             axios(config).then((response) => {
@@ -176,23 +182,29 @@ export default function LoginPage() {
           setVerifyLoading(true)
 
           const raw = JSON.stringify({
-              'email': email.trim().toLowerCase(),
-              'otp': Number(otp)
+            'email': email.trim().toLowerCase(),
+            // 'otp': Number(otp),
+            'otp': otp,
+            "last_login": Math.floor(Date.now() / 1000),
+            "last_login_ip": ""
           })
 
           const config = {
-              method: 'post',
-              maxBodyLength: Infinity,
-              url: `${import.meta.env.VITE_APP_API_URL}/verifyotp`,
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              data: raw
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `${import.meta.env.VITE_APP_API_URL}/user/verify-otp`,
+            headers: {
+              'access-token': `${import.meta.env.VITE_APP_API_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            data: raw
           };
 
           axios(config).then((response) => {
             if (response.status === 200) {
-                login(response.data.token, response.data.data);
+              console.log("response", response.data)
+                // login(response.data.token, response.data.data);
+                login("xxx1234567", response.data.results);
                 // setShowOTP(true)
                 // showToast('success', response.data.message)
             } else {
@@ -349,10 +361,10 @@ export default function LoginPage() {
                   </Button>
                 </Form.Item>                 
               </Form>
-
             <p className="footer">
               Didn't receive the code?{" "}
-              {showResendOTP? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <span className='resend_otp_text'>Resend OTP in <small>{counterTime}</small></span>}
+              {showResendOTP? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <><span className='resend_otp_text'>Resend OTP in </span>
+              <span className="resend_otp_btn">{counterTime}</span></>}
             </p>            
             </>}
           </div>

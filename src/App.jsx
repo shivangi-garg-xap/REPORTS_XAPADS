@@ -1,13 +1,41 @@
 import React from "react";
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from "./components/LoginPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/main.scss";
 
 import Layout from "./components/Layout";
 import FraudAnalyticsReport from "./components/FraudAnalyticsReport";
+import { useAuth } from './utils/AuthContext';
 
 function App() {
-  // return <Layout />
-  return <FraudAnalyticsReport />
+  const ProtectedRoute = ({ children }) => {
+    const { isAuthenticated } = useAuth();
+    return isAuthenticated ? children : <Navigate to="/" replace />;
+  }
+
+  const PublicRoute = ({ children }) => {
+    const { isAuthenticated } = useAuth();
+    return isAuthenticated ? <Navigate to="/home" replace /> : children;
+  }
+
+  const Logout = () => {
+    const { logout } = useAuth();
+    logout();
+
+    return <Navigate to="/" replace />;
+  };
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PublicRoute><LoginPage /></PublicRoute>} />
+        <Route path="/home" element={<Layout />} />
+        <Route path="/fraud-report" element={<FraudAnalyticsReport />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;
