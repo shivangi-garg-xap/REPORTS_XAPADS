@@ -1,2 +1,11 @@
-body{background:$bg-light;color:$dark;}
-.container{width:90%;margin:auto;}
+@use "./variables" as *;
+
+body {
+    background: $bg-light;
+    color: $dark;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}

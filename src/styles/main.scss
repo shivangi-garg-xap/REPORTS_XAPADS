@@ -1,9 +1,8 @@
-@import "./variables";
-@import "./mixins";
-@import "./reset";
-@import "./globals";
-
-@import "./pages/login";
-@import "./reports_layout";
-
+@use "./variables" as *;
+@use "./mixins" as *;
+@use "./reset";
+@use "./globals";
+@use "./pages/login";
+@use "./reports_layout";
+@use "./maintable";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");

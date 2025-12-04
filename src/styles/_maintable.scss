@@ -1,0 +1,208 @@
+@use "./variables" as *;
+
+.logo {
+    line-height: 0 !important;
+}
+
+.tableFixHead {
+    height: auto;
+    max-height: calc(100vh - 236px);
+    position: relative;
+    overflow: auto;
+    border-collapse: separate;
+    margin-top: 1.8rem;
+    border: 0.1rem solid $Gray-50;
+    border-radius: 12px;
+
+    .custom_data_table {
+        vertical-align: middle;
+        margin-bottom: 0px;
+        border-radius: 0.8rem 0.8rem 0 0;
+        border-color: #ffffff;
+
+        thead tr th {
+            background-color: #F9FAFD;
+            color: $Gray-500;
+            font-size: 1.2rem;
+            height: 34px;
+            font-weight: 500;
+            line-height: 1.8rem;
+            letter-spacing: 0.036rem;
+            text-transform: uppercase;
+            padding: 0 2rem;
+
+            &::before {
+                display: none;
+            }
+        }
+
+        tbody tr td {
+            padding: 1.2rem 2rem;
+            color: $Gray-85;
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 2rem;
+        }
+    }
+}
+
+.custom_pagination_design_cls {
+    padding: 0.8rem 2rem;
+
+    p {
+        color: $Gray-500;
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: normal;
+        margin: 0;
+    }
+
+    .dropdown_select_pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        .ant-select {
+            border-radius: 0.8rem;
+            border: 1px solid $Gray-300;
+            background: $white;
+            padding: 0.4rem 0.8rem;
+            width: 7rem;
+
+            .ant-select-content-value {
+                color: $Gray-900;
+                font-size: 1.2rem;
+                font-weight: 400;
+                line-height: 2.1rem;
+            }
+
+            &:hover {
+                border-color: $Primary-6;
+            }
+        }
+
+        .ant-select.ant-select-focused {
+            box-shadow: none;
+        }
+
+        .ant-select.ant-select-open {
+            border-color: $Primary-6;
+        }
+    }
+
+    .new_custom_pagination_design {
+        .ant-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+
+            .ant-pagination-item {
+                border-radius: 0.6rem;
+                border: 1px solid $Gray-300;
+                background: #FFF;
+                margin-inline-end: 4px;
+
+                a {
+                    color: $Gray-600;
+                    text-align: center;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .ant-pagination-jump-next,
+            .ant-pagination-jump-prev {
+                border-radius: 0.6rem;
+                border: 1px solid $Gray-300;
+                background: #FFF;
+                margin-inline-end: 4px;
+                pointer-events: none;
+            }
+
+            .ant-pagination-item.ant-pagination-item-active {
+                border-radius: 0.6rem;
+                border: 1px solid $Primary-6;
+                background: $Primary-05;
+
+                a {
+                    color: $Primary-6;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .ant-pagination-prev {
+                border-radius: 0.6rem;
+                margin-inline-end: 4px;
+                background: $white;
+
+                .ant-pagination-item-link {
+                    line-height: 0%;
+                }
+            }
+
+            .ant-pagination-next {
+                border-radius: 0.6rem;
+                background: $white;
+            }
+
+            .ant-pagination-prev.ant-pagination-disabled {
+                background-color: transparent;
+
+                a {
+                    svg {
+                        path {
+                            stroke: $Gray-300;
+                        }
+                    }
+                }
+            }
+
+            .ant-pagination-next.ant-pagination-disabled {
+                background-color: transparent;
+
+                a {
+                    svg {
+                        path {
+                            stroke: $Gray-300;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ant-select-dropdown {
+    .rc-virtual-list {
+        .rc-virtual-list-holder {
+            .rc-virtual-list-holder-inner {
+
+                .ant-select-item.ant-select-item-option {
+                    color: $Gray-600;
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                    line-height: 2.2rem;
+                }
+
+                .ant-select-item.ant-select-item-option.ant-select-item-option-active {
+                    background-color: #e3e3ff;
+
+                    .ant-select-item-option-content {
+                        line-height: 2.2rem;
+                        color: $Gray-900;
+                    }
+                }
+
+                .ant-select-item.ant-select-item-option.ant-select-item-option-selected {
+                    background-color: #e3e3ff;
+
+                    .ant-select-item-option-content {
+                        line-height: 2.2rem;
+                        color: $Gray-900;
+                    }
+                }
+            }
+        }
+    }
+}
