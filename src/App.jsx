@@ -30,7 +30,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PublicRoute><LoginPage /></PublicRoute>} />
-        <Route path="/home" element={<ProtectedRoute><Layout /></ProtectedRoute>} />
+        <Route path="/home" element={<Layout />} />
       </Routes>
     </BrowserRouter>
   )
