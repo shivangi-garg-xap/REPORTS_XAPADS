@@ -3,7 +3,7 @@ import Logo from '../assets/XapadsLogo.svg'
 import GenerateReportIcon from '../assets/generate_report_icon.svg'
 import { Flex, Layout, Table, Select, Tag, Col, DatePicker, Button, Pagination, Tooltip, Checkbox } from "antd";
 import { NavDropdown, Nav, Navbar } from 'react-bootstrap';
-
+import TopHeader from "./TopHeader";
 
 const { Header, Content } = Layout;
 const { Option } = Select;
@@ -135,34 +135,8 @@ export default function FraudAnalyticsReport() {
         setSelectedValues(values);
     };
     return (
-        <div className="reports-layout">
-            <Header className="top-nav">
-                <div className="nav-menu">
-                    <Navbar expand="lg" className="">
-                        <Navbar.Brand href="#home">
-                            <div className="logo">
-                                <img src={Logo} className="img-fluid" alt="" />
-                            </div>
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <NavDropdown title="Reporting" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#">RTB Report</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">ABC Report</NavDropdown.Item>
-                                </NavDropdown>
-                                <NavDropdown title="Fraud Reporting" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#">Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                                </NavDropdown>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-                </div>
-            </Header>
 
             <div className="content-wrapper">
-
                 <div className="heading_filter">
                     <h2>Fraud Analytics Report</h2>
                     <div className="filters">
@@ -471,6 +445,5 @@ export default function FraudAnalyticsReport() {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }

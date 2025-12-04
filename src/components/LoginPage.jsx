@@ -117,58 +117,11 @@ export default function LoginPage() {
         }, 1000);
     };
 
-    const [otp, setOTP] = useState(null);
-    const [otpErr, setOTPErr] = useState(false)
-    const [otpErrMsg, setOTPErrMsg] = useState("")
     const [verifyLoading, setVerifyLoading] = useState(false)
-
-    const [otpArr, setOTPArr] = useState([])
-
-    const handleBeforeInput = (e) => {
-      // Block non-digit inputs (except Enter, Backspace, etc.)
-      if (!/^\d+$/.test(e.data)) {
-        e.preventDefault();
-      }
-    }
-
-    const onChangeOTP = (otpValue) => {
-      if (!/^\d*$/.test(otpValue)) {
-          return;
-      }
-
-      if (otpValue.length === 0) {
-          setOTPErr(true);
-          setOTPErrMsg("OTP is required");
-      } else {
-          setOTPErr(false);
-          setOTPErrMsg("");
-      }
-
-      setOTP(otpValue.slice(0, 6));
-
-      if (otpValue.length === 6) {
-          setTimeout(() => {
-              form.submit();
-          }, 0);
-      }
-    }
-
-    const handlePaste = (e) => {
-      e.preventDefault();
-      const pasted = e.clipboardData.getData('text').trim();
-
-      // allow only digits
-      if (!/^\d+$/.test(pasted)) return;
-
-      // if more than 6 chars, trim
-      const cleanOtp = pasted.slice(0, 6);
-
-      // directly update your OTP state
-      onChangeOTP(cleanOtp);
-    };
 
     // Verify Login AFter OTP Input Complete By User
     const verifyLogin = () => {
+      console.log("otp", otpErr, otp.length)
       if ((otp.length < 6) || otpErr) {
         if (otp === "") {
           setOTPErr(true)
@@ -228,22 +181,27 @@ export default function LoginPage() {
       setShowOTP(false)
     }
 
+    const [otp, setOTP] = useState(null)
+    const [otpArr, setOTPArr] = useState([])
+    const [otpErr, setOTPErr] = useState(false)
+    const [otpErrMsg, setOTPErrMsg] = useState("")
+
     const handleOTPInput = (value) => {
         // console.log('handleOTPInput:', value);
 
-      if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
-      setOTPArr(value)
+        // if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
+        setOTPArr(value)
     }
 
     const handleOTP = (otp) => {
-      // console.log('onChange:', otp);
-      setOTP(otp)
-      setOTPErr(false)
-      setOTPErrMsg("")
+        // console.log('onChange:', otp);
+        setOTP(otp)
+        setOTPErr(false)
+        setOTPErrMsg("")
 
-      if (otp.length === 6 && /^\d{6}$/.test(otp)) {
-          verifyLogin(otp);  // pass otp directly
-      }
+        if (otp.length === 6 && /^\d{6}$/.test(otp)) {
+            verifyLogin(otp);  // pass otp directly
+        }
     };
     
     const handleEmailEdit = () => {

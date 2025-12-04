@@ -9,7 +9,7 @@ import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
-export default function ReportsLayout() {
+export default function XiaomiRTBReport() {
   const today = dayjs();
     const yesterday = dayjs().subtract(1, 'day');
     const last7DaysStart = dayjs().subtract(6, 'day');
@@ -281,9 +281,6 @@ export default function ReportsLayout() {
     };
 
   return (
-    <div className="reports-layout">
-      <TopHeader />
-
       <div className="content-wrapper">
         <div className="heading_filter">
           <h2>RTB Report</h2>
@@ -337,87 +334,87 @@ export default function ReportsLayout() {
         </div>
 
         <div className="view_data_div">
-          {filteredData.length <=0 ? <div className="empty-state">
-            <img src={GenerateReportIcon} alt="empty" className="img-fluid" />
-            <h3>Generate a Report</h3>
-            <p>Please select "Date" from above to <br /> generate the report.</p>
-          </div>
-          :
-          <div className="tableFixHead">
-            <div className="table_design custom_data_table">
-              <Table columns={columns} dataSource={filteredData}
-                pagination={{
-                showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
-                defaultPageSize: 20,   // 👈 ensures initial load = 20
-                // pageSize: 20,
-                showSizeChanger: true,
-                pageSizeOptions: ['20', '50', '100'],
-                selectProps: {
-                    showSearch: false,
-                    optionFilterProp: null
-                }
-              }} />
-              {/* <div className="d-flex align-items-center justify-content-between custom_pagination_design_cls">
-                <Col span={12}>
-                  <div className="d-flex align-items-center justify-content-between w-100">
-                    <div className="dropdown_select_pagination">
-                      <Select
-                        defaultValue="10"
-                        onChange={handleChange}
-                        // open={true}
-                        options={[
-                          { value: '10', label: '10' },
-                          { value: '20', label: '20' },
-                          { value: '30', label: '30' },
-                          { value: '40', label: '40' },
-                        ]}
-                        suffixIcon={
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                            <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="#475467" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>
-                        }
-                      />
-                      <p> 197 records</p>
-                    </div>
-                    <div>
-                      <p><strong>1-10</strong> of 197 records</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col span={12}>
-
-                  <div className="new_custom_pagination_design">
-                    <Pagination
-                      defaultCurrent={6}
-                      total={500}
-                      className="custom_pagination"
-                      showSizeChanger={false}
-                      itemRender={(page, type, originalElement) => {
-                        if (type === "prev") {
-                          return <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                              <path d="M4.64844 0.649902L0.648437 4.6499L4.64844 8.6499" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                          </a>;
-                        }
-                        if (type === "next") {
-                          return <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                              <path d="M6 12L10 8L6 4" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                          </a>;
-                        }
-                        return originalElement;
-                      }}
-                    />
-                  </div>
-                </Col>
-              </div> */}
+          {filteredData.length <=0 ? 
+            <div className="empty-state">
+              <img src={GenerateReportIcon} alt="empty" className="img-fluid" />
+              <h3>Generate a Report</h3>
+              <p>Please select "Date" from above to <br /> generate the report.</p>
             </div>
-          </div>
-}
+            :
+            <div className="tableFixHead">
+              <div className="table_design custom_data_table">
+                <Table columns={columns} dataSource={filteredData}
+                  pagination={{
+                  showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
+                  defaultPageSize: 20,   // 👈 ensures initial load = 20
+                  // pageSize: 20,
+                  showSizeChanger: true,
+                  pageSizeOptions: ['20', '50', '100'],
+                  selectProps: {
+                      showSearch: false,
+                      optionFilterProp: null
+                  }
+                }} />
+                {/* <div className="d-flex align-items-center justify-content-between custom_pagination_design_cls">
+                  <Col span={12}>
+                    <div className="d-flex align-items-center justify-content-between w-100">
+                      <div className="dropdown_select_pagination">
+                        <Select
+                          defaultValue="10"
+                          onChange={handleChange}
+                          // open={true}
+                          options={[
+                            { value: '10', label: '10' },
+                            { value: '20', label: '20' },
+                            { value: '30', label: '30' },
+                            { value: '40', label: '40' },
+                          ]}
+                          suffixIcon={
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="#475467" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                          }
+                        />
+                        <p> 197 records</p>
+                      </div>
+                      <div>
+                        <p><strong>1-10</strong> of 197 records</p>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col span={12}>
+
+                    <div className="new_custom_pagination_design">
+                      <Pagination
+                        defaultCurrent={6}
+                        total={500}
+                        className="custom_pagination"
+                        showSizeChanger={false}
+                        itemRender={(page, type, originalElement) => {
+                          if (type === "prev") {
+                            return <a>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                                <path d="M4.64844 0.649902L0.648437 4.6499L4.64844 8.6499" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                            </a>;
+                          }
+                          if (type === "next") {
+                            return <a>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 12L10 8L6 4" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                            </a>;
+                          }
+                          return originalElement;
+                        }}
+                      />
+                    </div>
+                  </Col>
+                </div> */}
+              </div>
+            </div>
+          }
         </div>
       </div>
-    </div>
   );
 }

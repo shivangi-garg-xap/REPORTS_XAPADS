@@ -50,12 +50,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    // Check if the token is expired when the app loads
-    if (token && isTokenExpired(token)) {
-      logout(); // Log the user out if the token is expired
-    }
-  }, [token]);
+//   useEffect(() => {
+//     // Check if the token is expired when the app loads
+//     if (token && isTokenExpired(token)) {
+//       logout(); // Log the user out if the token is expired
+//     }
+//   }, [token]);
 
   return (
     <AuthContext.Provider value={{ token, user, isAuthenticated, login, logout, handleUnauthorized }}>
