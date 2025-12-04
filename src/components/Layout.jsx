@@ -1,22 +1,15 @@
 import React, {useState, useEffect} from "react";
-import Logo from '../assets/XapadsLogo.svg'
 import GenerateReportIcon from '../assets/generate_report_icon.svg'
 import { Flex, Layout, Table, Select, Tag, Col, DatePicker, Button, Pagination, Space, Button as AntdButton } from "antd";
-import { NavDropdown, Nav, Navbar } from 'react-bootstrap';
+// import { NavDropdown, Nav, Navbar } from 'react-bootstrap';
+import TopHeader from "./TopHeader";
 import dayjs from 'dayjs';
 import DateRangePicker from "react-bootstrap-daterangepicker";
 import axios from "axios";
 
 const { RangePicker } = DatePicker;
 
-const { Header, Content } = Layout;
-
 export default function ReportsLayout() {
-
-  // const handleChange = value => {
-  //   console.log(`selected ${value}`);
-  // };
-
   const today = dayjs();
     const yesterday = dayjs().subtract(1, 'day');
     const last7DaysStart = dayjs().subtract(6, 'day');
@@ -289,33 +282,9 @@ export default function ReportsLayout() {
 
   return (
     <div className="reports-layout">
-      <Header className="top-nav">
-        <div className="nav-menu">
-          <Navbar expand="lg" className="">
-            <Navbar.Brand href="#home">
-              <div className="logo">
-                <img src={Logo} className="img-fluid" alt="" />
-              </div>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <NavDropdown title="Reporting" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">RTB Report</NavDropdown.Item>
-                  <NavDropdown.Item href="#">ABC Report</NavDropdown.Item>
-                </NavDropdown>
-                <NavDropdown title="Fraud Reporting" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#">Something</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </div>
-      </Header>
+      <TopHeader />
 
       <div className="content-wrapper">
-
         <div className="heading_filter">
           <h2>RTB Report</h2>
           <div className="filters">
