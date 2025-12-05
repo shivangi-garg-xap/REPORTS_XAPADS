@@ -82,7 +82,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 4.4rem;
-      margin-bottom: 5px;
+      margin-bottom: 0;
     }
 
     .signin-msg {
@@ -105,34 +105,34 @@
 
     .input-box {
       display: flex;
-      padding: 1.35rem 20rem 1.35rem 2rem;
+      padding: 0 2rem;
       align-items: center;
+      width: 50rem;
       align-self: stretch;
-
+      height: 4.8rem;
       border-radius: 0.8rem;
-      border: 0.7px solid var(--Grey-3, #C1C7D1);
-      background: var(--grey-05, #F5F6F7);
+      border: 0.7px solid $Gray-3;
+      background: $Gray-05;
+      outline-color: transparent;
 
-      &:hover {
-        border: 0.7px solid var(--Primary-3, #A1A3F7);
-        background: var(--grey-05, #F5F6F7);
+      .ant-input-prefix {
+        margin-right: 1rem;
       }
 
-      &:focus {
-        border: 3px solid var(--Primary-1, #E0E0FC);
-        background: var(--grey-05, #F5F6F7);
+      &:hover {
+        border: 0.7px solid $Primary-3;
+        background: $Gray-05;
       }
 
       // margin-bottom: 25px;
 
       input {
-        color: var(--Gray-900, #0A0A0A);
+        color: $Gray-900;
         font-family: Poppins;
-        color: var(--Gray-900, #0A0A0A);
+        color: $Gray-900;
 
         &::placeholder {
-
-          color: var(--Grey-6, #7D8593);
+          color: $Gray-6;
         }
 
         // font-family: Poppins;
@@ -157,6 +157,16 @@
       }
     }
 
+    .input-box.ant-input-affix-wrapper-focused {
+      border: 0.7px solid $Primary-3;
+      outline: 3px solid $Primary-1;
+      background: $Gray-05;
+    }
+
+    .input-box.ant-input-status-error {
+      outline: 3px solid $Error-200;
+    }
+
     .otp_input_box {
       .ant-otp-input {
         background-color: #F5F7F9;
@@ -164,7 +174,23 @@
         width: 6.8rem;
         padding: 1.5rem 1.2rem;
         font-size: x-large;
-        border: 1px solid var(--Gray-300, #D0D5DD);
+        border: 1px solid $Gray-300;
+        outline-color: transparent;
+
+        &:hover {
+          border: 0.7px solid $Primary-3;
+          background: $Gray-05;
+        }
+
+        &:focus {
+          border: 0.7px solid $Primary-3;
+          outline: 3px solid $Primary-1;
+          background: $Gray-05;
+        }
+      }
+
+      .otp_input_box.ant-input-status-error {
+        outline: 3px solid $Error-200;
       }
 
       display: inline-flex;
@@ -287,17 +313,14 @@
       // }
     }
 
-    .footer {
+    .below_text {
       margin-top: 8rem;
-
-      color: var(--Grey-6, #7D8593);
+      color: $Gray-6;
+      margin-bottom: 0;
       text-align: center;
-      font-family: Poppins;
       font-size: 1.6rem;
-      font-style: normal;
       font-weight: 400;
       line-height: 2.253rem;
-      /* 140.813% */
 
       .contact-link {
         font-weight: 600;
@@ -305,14 +328,21 @@
       }
 
       .resend_otp_btn {
-        color: var(--grey-95, #1D2024);
-        font-family: Poppins;
+        color: $Gray-95;
         font-size: 1.6rem;
         font-style: normal;
         font-weight: 500;
         line-height: 2.253rem;
       }
     }
+
+    .ant-form-item-explain-error {
+      color: $Error-600;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: normal;
+    }
+
   }
 }
 
@@ -370,7 +400,7 @@
   margin-top: 1.2rem;
 
   .ant-form-item-label label {
-    color: var(--grey-95, #1D2024);
+    color: $Gray-95;
     font-family: Poppins;
     font-size: 1.6rem;
     font-style: normal;
@@ -398,4 +428,17 @@
   .right-form-section {
     padding: 40px 20px;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
 }

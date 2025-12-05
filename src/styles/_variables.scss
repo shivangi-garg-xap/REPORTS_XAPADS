@@ -13,18 +13,29 @@ $radius-md: 8px;
 
 
 // main variables
-$Primary-05: #EFF0FE;
+$Primary-1: #E0E0FC;
 $Primary-2: #C1C2F9;
+$Primary-3: #A1A3F7;
+$Primary-05: #EFF0FE;
 $Primary-6: #5052C9;
 $Primary-8: #2A2B79;
 $primary-95: #0E0E3D;
 
+$Gray-3: #C1C7D1;
+$Gray-05: #F5F6F7;
+$Gray-6: #7D8593;
 $Gray-10: #0F1114;
 $Gray-50: #E9EDF5;
 $Gray-85: #383D44;
+$Gray-95: #1D2024;
 $Gray-200: #EAECF0;
 $Gray-300: #D0D5DD;
 $Gray-500: #687182;
 $Gray-600: #475467;
 $Gray-800: #1D2939;
 $Gray-900: #0A0A0A;
+
+
+// Errors color
+$Error-600: #D92D20;
+$Error-200: #FECDCA;

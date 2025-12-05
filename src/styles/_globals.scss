@@ -9,3 +9,256 @@ body {
     width: 90%;
     margin: auto;
 }
+
+.login_btn_cls {
+    margin-top: 3.5rem;
+}
+
+// this css for range picker dropdown
+
+.ant_date_rangepicker {
+    position: relative;
+    cursor: pointer;
+
+    & .ant-picker.ant-picker-range.date_main {
+        width: 9rem;
+    }
+
+    & .ant-picker.ant-picker-range {
+        color: transparent;
+        height: 3.2rem;
+        opacity: 0;
+        width: 22rem;
+    }
+
+    & .ant-picker.ant-picker-range.date_main_1 {
+        width: 12rem;
+    }
+
+    & .custom-display {
+        position: absolute;
+        top: -0.2rem;
+        z-index: 1;
+        color: #636068;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        padding-left: 1.2rem;
+        border-radius: 0.8rem;
+        border: 0.1rem solid #DFE1E6;
+        background: #FFF;
+        height: 3.6rem;
+        align-items: center;
+        display: flex;
+        transition: 0.4s;
+        width: 100%;
+        gap: 0.4rem;
+
+        &:hover {
+            border: 0.1rem solid #7D46B0 !important;
+            color: #7D46B0 !important;
+        }
+    }
+}
+
+.ant-picker-dropdown {
+    .ant-picker-footer {
+        width: 16rem;
+        border-top: 0;
+        border-right: 0.1rem solid rgba(5, 5, 5, 0.06);
+    }
+}
+
+.custom_range_calendar {
+
+    .ant-picker-panel-layout>div {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .ant-picker-footer {
+        .ant-picker-footer-extra {
+            .ant-space {
+                .ant-space-item {
+                    display: flex;
+                    width: 100%;
+
+                    .ant-btn {
+                        justify-content: start;
+                        width: 100%;
+                        border: none;
+                        padding: 0;
+                        height: auto;
+                        gap: 0;
+
+                        &:hover {
+                            color: $Primary-6;
+                        }
+
+                        &.active {
+                            color: $Primary-6;
+                            font-weight: 500;
+                        }
+
+                        div {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ant-picker-dropdown {
+        z-index: 9999 !important;
+    }
+
+    .ant-dropdown-menu-item-selected {
+        background-color: #1890ff;
+        color: white;
+    }
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected:not(.ant-picker-cell-disabled) .ant-picker-cell-inner,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-disabled) .ant-picker-cell-inner,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-disabled) .ant-picker-cell-inner {
+    color: #fff;
+    background: $Primary-6;
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range:not(.ant-picker-cell-disabled):before,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-disabled):before,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-disabled):before {
+    background: #7d46b014;
+}
+
+.ant-picker-dropdown .ant-picker-header-view>button:hover {
+    color: $Primary-6;
+
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner:before {
+    border: 0.1rem solid $Primary-6;
+}
+
+.ant-select-outlined:hover .ant-select-selector {
+    svg {
+        path {
+            stroke: $Primary-6;
+        }
+    }
+}
+
+// this css for range picker dropdown
+
+.custom_pagination_cls {
+    .ant-spin-nested-loading {
+        .ant-pagination {
+            margin: 0;
+            padding: 0.8rem 2rem;
+            position: relative;
+            border-top: 0.1rem solid $Gray-300;
+
+            .ant-pagination-total-text {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: $Gray-500;
+                font-size: 1.2rem;
+                height: auto;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            .ant-pagination-options {
+                position: absolute;
+                left: 1%;
+                margin: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .ant-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+
+            .ant-pagination-item {
+                border-radius: 0.6rem;
+                border: 1px solid $Gray-300;
+                background: #FFF;
+                margin-inline-end: 4px;
+
+                a {
+                    color: $Gray-600;
+                    text-align: center;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .ant-pagination-jump-next,
+            .ant-pagination-jump-prev {
+                border-radius: 0.6rem;
+                border: 1px solid $Gray-300;
+                background: #FFF;
+                margin-inline-end: 4px;
+                pointer-events: none;
+            }
+
+            .ant-pagination-item.ant-pagination-item-active {
+                border-radius: 0.6rem;
+                border: 1px solid $Primary-6;
+                background: $Primary-05;
+
+                a {
+                    color: $Primary-6;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .ant-pagination-prev {
+                border-radius: 0.6rem;
+                margin-inline-end: 4px;
+                background: $white;
+
+                .ant-pagination-item-link {
+                    line-height: 0%;
+                }
+            }
+
+            .ant-pagination-next {
+                border-radius: 0.6rem;
+                background: $white;
+            }
+
+            .ant-pagination-prev.ant-pagination-disabled {
+                background-color: transparent;
+
+                a {
+                    svg {
+                        path {
+                            stroke: $Gray-300;
+                        }
+                    }
+                }
+            }
+
+            .ant-pagination-next.ant-pagination-disabled {
+                background-color: transparent;
+
+                a {
+                    svg {
+                        path {
+                            stroke: $Gray-300;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
