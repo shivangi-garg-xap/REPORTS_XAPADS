@@ -21,7 +21,7 @@ body {
     cursor: pointer;
 
     & .ant-picker.ant-picker-range.date_main {
-        width: 9rem;
+        width: 9.5rem;
     }
 
     & .ant-picker.ant-picker-range {
@@ -32,7 +32,7 @@ body {
     }
 
     & .ant-picker.ant-picker-range.date_main_1 {
-        width: 12rem;
+        width: 13rem;
     }
 
     & .custom-display {
@@ -56,8 +56,8 @@ body {
         gap: 0.4rem;
 
         &:hover {
-            border: 0.1rem solid #7D46B0 !important;
-            color: #7D46B0 !important;
+            border: 0.1rem solid $Primary-6 !important;
+            color: $Primary-6 !important;
         }
     }
 }

@@ -33,20 +33,20 @@ export default function XiaomiRTBReport() {
   const wrapperRef = useRef(null);
 
   useEffect(() => {
-      const handleClickOutside = (event) => {
-          const wrapperEl = wrapperRef.current;
-          const isInPickerWrapper = wrapperEl?.contains(event.target);
-          const isInDropdown = document.querySelector('.ant-picker-dropdown')?.contains(event.target);
+    const handleClickOutside = (event) => {
+      const wrapperEl = wrapperRef.current;
+      const isInPickerWrapper = wrapperEl?.contains(event.target);
+      const isInDropdown = document.querySelector('.ant-picker-dropdown')?.contains(event.target);
 
-          if (!isInPickerWrapper && !isInDropdown) {
-              setOpen(false); // Close if clicked outside both wrapper and calendar popup
-          }
-      };
+      if (!isInPickerWrapper && !isInDropdown) {
+        setOpen(false); // Close if clicked outside both wrapper and calendar popup
+      }
+    };
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-      };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const [startDate, setStartDate] = useState(dayjs().subtract(6, 'day').format('YYYY-MM-DD'))
@@ -62,7 +62,7 @@ export default function XiaomiRTBReport() {
     } else {
       // console.log('Range cleared', dates);
     }
-    
+
     setOpen(false)
     // if (rowDataSelectedApply?.length > 0 && columnDataSelectedApply?.length > 0) {
     //     setApicall(!apiCall)
@@ -307,52 +307,46 @@ export default function XiaomiRTBReport() {
       <div className="heading_filter">
         <h2>RTB Report</h2>
         <div className="filters">
-          {/* <div className="ant_date_rangepicker"> */}
-          {/* <div className="custom-display">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M8 9.3335C7.81111 9.3335 7.65289 9.2695 7.52533 9.1415C7.39733 9.01394 7.33333 8.85572 7.33333 8.66683C7.33333 8.47794 7.39733 8.3195 7.52533 8.1915C7.65289 8.06394 7.81111 8.00016 8 8.00016C8.18889 8.00016 8.34733 8.06394 8.47533 8.1915C8.60289 8.3195 8.66667 8.47794 8.66667 8.66683C8.66667 8.85572 8.60289 9.01394 8.47533 9.1415C8.34733 9.2695 8.18889 9.3335 8 9.3335ZM5.33333 9.3335C5.14444 9.3335 4.986 9.2695 4.858 9.1415C4.73044 9.01394 4.66667 8.85572 4.66667 8.66683C4.66667 8.47794 4.73044 8.3195 4.858 8.1915C4.986 8.06394 5.14444 8.00016 5.33333 8.00016C5.52222 8.00016 5.68067 8.06394 5.80867 8.1915C5.93622 8.3195 6 8.47794 6 8.66683C6 8.85572 5.93622 9.01394 5.80867 9.1415C5.68067 9.2695 5.52222 9.3335 5.33333 9.3335ZM10.6667 9.3335C10.4778 9.3335 10.3196 9.2695 10.192 9.1415C10.064 9.01394 10 8.85572 10 8.66683C10 8.47794 10.064 8.3195 10.192 8.1915C10.3196 8.06394 10.4778 8.00016 10.6667 8.00016C10.8556 8.00016 11.0138 8.06394 11.1413 8.1915C11.2693 8.3195 11.3333 8.47794 11.3333 8.66683C11.3333 8.85572 11.2693 9.01394 11.1413 9.1415C11.0138 9.2695 10.8556 9.3335 10.6667 9.3335ZM8 12.0002C7.81111 12.0002 7.65289 11.9362 7.52533 11.8082C7.39733 11.6806 7.33333 11.5224 7.33333 11.3335C7.33333 11.1446 7.39733 10.9864 7.52533 10.8588C7.65289 10.7308 7.81111 10.6668 8 10.6668C8.18889 10.6668 8.34733 10.7308 8.47533 10.8588C8.60289 10.9864 8.66667 11.1446 8.66667 11.3335C8.66667 11.5224 8.60289 11.6806 8.47533 11.8082C8.34733 11.9362 8.18889 12.0002 8 12.0002ZM5.33333 12.0002C5.14444 12.0002 4.986 11.9362 4.858 11.8082C4.73044 11.6806 4.66667 11.5224 4.66667 11.3335C4.66667 11.1446 4.73044 10.9864 4.858 10.8588C4.986 10.7308 5.14444 10.6668 5.33333 10.6668C5.52222 10.6668 5.68067 10.7308 5.80867 10.8588C5.93622 10.9864 6 11.1446 6 11.3335C6 11.5224 5.93622 11.6806 5.80867 11.8082C5.68067 11.9362 5.52222 12.0002 5.33333 12.0002ZM10.6667 12.0002C10.4778 12.0002 10.3196 11.9362 10.192 11.8082C10.064 11.6806 10 11.5224 10 11.3335C10 11.1446 10.064 10.9864 10.192 10.8588C10.3196 10.7308 10.4778 10.6668 10.6667 10.6668C10.8556 10.6668 11.0138 10.7308 11.1413 10.8588C11.2693 10.9864 11.3333 11.1446 11.3333 11.3335C11.3333 11.5224 11.2693 11.6806 11.1413 11.8082C11.0138 11.9362 10.8556 12.0002 10.6667 12.0002ZM3.33333 14.6668C2.96667 14.6668 2.65267 14.5364 2.39133 14.2755C2.13044 14.0142 2 13.7002 2 13.3335V4.00016C2 3.6335 2.13044 3.31972 2.39133 3.05883C2.65267 2.7975 2.96667 2.66683 3.33333 2.66683H4V2.00016C4 1.81127 4.06378 1.65283 4.19133 1.52483C4.31933 1.39727 4.47778 1.3335 4.66667 1.3335C4.85556 1.3335 5.014 1.39727 5.142 1.52483C5.26956 1.65283 5.33333 1.81127 5.33333 2.00016V2.66683H10.6667V2.00016C10.6667 1.81127 10.7307 1.65283 10.8587 1.52483C10.9862 1.39727 11.1444 1.3335 11.3333 1.3335C11.5222 1.3335 11.6804 1.39727 11.808 1.52483C11.936 1.65283 12 1.81127 12 2.00016V2.66683H12.6667C13.0333 2.66683 13.3473 2.7975 13.6087 3.05883C13.8696 3.31972 14 3.6335 14 4.00016V13.3335C14 13.7002 13.8696 14.0142 13.6087 14.2755C13.3473 14.5364 13.0333 14.6668 12.6667 14.6668H3.33333ZM3.33333 13.3335H12.6667V6.66683H3.33333V13.3335ZM3.33333 5.3335H12.6667V4.00016H3.33333V5.3335ZM3.33333 5.3335V4.00016V5.3335Z" fill="#7D46B0" />
-              </svg> {displayValue}
-            </div> */}
-
+          <div className="ant_date_rangepicker">
             <div className="custom-display" onClick={() => setOpen(prev => !prev)}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M8 9.3335C7.81111 9.3335 7.65289 9.2695 7.52533 9.1415C7.39733 9.01394 7.33333 8.85572 7.33333 8.66683C7.33333 8.47794 7.39733 8.3195 7.52533 8.1915C7.65289 8.06394 7.81111 8.00016 8 8.00016C8.18889 8.00016 8.34733 8.06394 8.47533 8.1915C8.60289 8.3195 8.66667 8.47794 8.66667 8.66683C8.66667 8.85572 8.60289 9.01394 8.47533 9.1415C8.34733 9.2695 8.18889 9.3335 8 9.3335ZM5.33333 9.3335C5.14444 9.3335 4.986 9.2695 4.858 9.1415C4.73044 9.01394 4.66667 8.85572 4.66667 8.66683C4.66667 8.47794 4.73044 8.3195 4.858 8.1915C4.986 8.06394 5.14444 8.00016 5.33333 8.00016C5.52222 8.00016 5.68067 8.06394 5.80867 8.1915C5.93622 8.3195 6 8.47794 6 8.66683C6 8.85572 5.93622 9.01394 5.80867 9.1415C5.68067 9.2695 5.52222 9.3335 5.33333 9.3335ZM10.6667 9.3335C10.4778 9.3335 10.3196 9.2695 10.192 9.1415C10.064 9.01394 10 8.85572 10 8.66683C10 8.47794 10.064 8.3195 10.192 8.1915C10.3196 8.06394 10.4778 8.00016 10.6667 8.00016C10.8556 8.00016 11.0138 8.06394 11.1413 8.1915C11.2693 8.3195 11.3333 8.47794 11.3333 8.66683C11.3333 8.85572 11.2693 9.01394 11.1413 9.1415C11.0138 9.2695 10.8556 9.3335 10.6667 9.3335ZM8 12.0002C7.81111 12.0002 7.65289 11.9362 7.52533 11.8082C7.39733 11.6806 7.33333 11.5224 7.33333 11.3335C7.33333 11.1446 7.39733 10.9864 7.52533 10.8588C7.65289 10.7308 7.81111 10.6668 8 10.6668C8.18889 10.6668 8.34733 10.7308 8.47533 10.8588C8.60289 10.9864 8.66667 11.1446 8.66667 11.3335C8.66667 11.5224 8.60289 11.6806 8.47533 11.8082C8.34733 11.9362 8.18889 12.0002 8 12.0002ZM5.33333 12.0002C5.14444 12.0002 4.986 11.9362 4.858 11.8082C4.73044 11.6806 4.66667 11.5224 4.66667 11.3335C4.66667 11.1446 4.73044 10.9864 4.858 10.8588C4.986 10.7308 5.14444 10.6668 5.33333 10.6668C5.52222 10.6668 5.68067 10.7308 5.80867 10.8588C5.93622 10.9864 6 11.1446 6 11.3335C6 11.5224 5.93622 11.6806 5.80867 11.8082C5.68067 11.9362 5.52222 12.0002 5.33333 12.0002ZM10.6667 12.0002C10.4778 12.0002 10.3196 11.9362 10.192 11.8082C10.064 11.6806 10 11.5224 10 11.3335C10 11.1446 10.064 10.9864 10.192 10.8588C10.3196 10.7308 10.4778 10.6668 10.6667 10.6668C10.8556 10.6668 11.0138 10.7308 11.1413 10.8588C11.2693 10.9864 11.3333 11.1446 11.3333 11.3335C11.3333 11.5224 11.2693 11.6806 11.1413 11.8082C11.0138 11.9362 10.8556 12.0002 10.6667 12.0002ZM3.33333 14.6668C2.96667 14.6668 2.65267 14.5364 2.39133 14.2755C2.13044 14.0142 2 13.7002 2 13.3335V4.00016C2 3.6335 2.13044 3.31972 2.39133 3.05883C2.65267 2.7975 2.96667 2.66683 3.33333 2.66683H4V2.00016C4 1.81127 4.06378 1.65283 4.19133 1.52483C4.31933 1.39727 4.47778 1.3335 4.66667 1.3335C4.85556 1.3335 5.014 1.39727 5.142 1.52483C5.26956 1.65283 5.33333 1.81127 5.33333 2.00016V2.66683H10.6667V2.00016C10.6667 1.81127 10.7307 1.65283 10.8587 1.52483C10.9862 1.39727 11.1444 1.3335 11.3333 1.3335C11.5222 1.3335 11.6804 1.39727 11.808 1.52483C11.936 1.65283 12 1.81127 12 2.00016V2.66683H12.6667C13.0333 2.66683 13.3473 2.7975 13.6087 3.05883C13.8696 3.31972 14 3.6335 14 4.00016V13.3335C14 13.7002 13.8696 14.0142 13.6087 14.2755C13.3473 14.5364 13.0333 14.6668 12.6667 14.6668H3.33333ZM3.33333 13.3335H12.6667V6.66683H3.33333V13.3335ZM3.33333 5.3335H12.6667V4.00016H3.33333V5.3335ZM3.33333 5.3335V4.00016V5.3335Z" fill="#7D46B0" />
-            </svg> {displayValue}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="me-2" viewBox="0 0 16 16" fill="none">
+                <path d="M10.6667 1.33334V4.00001M5.33333 1.33334V4.00001M2 6.66668H14M3.33333 2.66668H12.6667C13.403 2.66668 14 3.26363 14 4.00001V13.3333C14 14.0697 13.403 14.6667 12.6667 14.6667H3.33333C2.59695 14.6667 2 14.0697 2 13.3333V4.00001C2 3.26363 2.59695 2.66668 3.33333 2.66668Z" stroke="#5052C9" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>{displayValue}
             </div>
-          <RangePicker
-            value={selectedRange}
-            onChange={handleChange}
-            dropdownClassName='custom_range_calendar'
-            format="DD/MM/YYYY"
-            disabledDate={(current) => current && current > dayjs().endOf('day')}
-            // open={true}
+            <RangePicker
+              value={selectedRange}
+              onChange={handleChange}
+              dropdownClassName='custom_range_calendar'
+              format="DD/MM/YYYY"
+              disabledDate={(current) => current && current > dayjs().endOf('day')}
+              // open={true}
 
-            className={displayValue === "Today" ? "date_main" : displayValue === "Yesterday" ? "date_main_1" : displayValue === "Last 7 Days" ? "date_main_1" : displayValue === "This Month" ? "date_main_1" : displayValue === "Last Month" ? "date_main_1" : ""}
-            allowClear={false}
-            open={open}
-            // onOpenChange={handleOpenChange}
-            // onCalendarChange={() => {
-            //     fetchData();
-            // }}
-            renderExtraFooter={() => (
-              <Space wrap>
-                {Object.entries(shortcuts).map(([label, range]) => (
-                  <Button
-                    key={label}
-                    onClick={() => {
-                      handleShortcutClick(range);
-                      setStartDate(range[0].format('YYYY-MM-DD'));
-                      setEndDate(range[1].format('YYYY-MM-DD'));
-                    }}
-                    className={matchedShortcutKey === label ? 'active' : undefined}
-                  >
-                    {label}
-                  </Button>
-                ))}
-              </Space>
-            )}
-          />
-          {/* </div> */}
+              className={displayValue === "Today" ? "date_main" : displayValue === "Yesterday" ? "date_main_1" : displayValue === "Last 7 Days" ? "date_main_1" : displayValue === "This Month" ? "date_main_1" : displayValue === "Last Month" ? "date_main_1" : ""}
+              allowClear={false}
+              open={open}
+              // onOpenChange={handleOpenChange}
+              // onCalendarChange={() => {
+              //     fetchData();
+              // }}
+              renderExtraFooter={() => (
+                <Space wrap>
+                  {Object.entries(shortcuts).map(([label, range]) => (
+                    <Button
+                      key={label}
+                      onClick={() => {
+                        handleShortcutClick(range);
+                        setStartDate(range[0].format('YYYY-MM-DD'));
+                        setEndDate(range[1].format('YYYY-MM-DD'));
+                      }}
+                      className={matchedShortcutKey === label ? 'active' : undefined}
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                </Space>
+              )}
+            />
+          </div>
           <span className="divider"></span>
           <Button type="primary" className="" onClick={fetchReport}>
             Get Report
