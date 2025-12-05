@@ -3,15 +3,19 @@ import { Row, Col, Form, Input, Button } from "antd";
 // import "./pages/login.scss";
 import BtnLoader from '../assets/btn_loader.gif'
 
-import XapadsLogoBlack from "../assets/xapads_logo_black.svg"
+
+import XapadsLogo from "../assets/XapadsLogo.svg"
 import axios from "axios";
 
+
 import { useAuth } from '../utils/AuthContext';
+
 
 export default function LoginPage() {
   const [form] = Form.useForm();
 
   const { login } = useAuth()
+
 
   const errSufix = (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,10 +25,13 @@ export default function LoginPage() {
     </svg>
   )
 
+
   const [showOTP, setShowOTP] = useState(false)
+
 
   // Validate Email From API On SigIn Button And Open OTP Screen
   const [showLoading, setShowLoading] = useState(false)
+
 
   const [email, setEmail] = useState("")
   const [emailErr, setEmailErr] = useState(false)
@@ -34,6 +41,7 @@ export default function LoginPage() {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     setEmail(email)
 
+
     if (email === "") {
       setEmailErr(true)
       setEmailErrMsg("Email is required.")
@@ -41,12 +49,15 @@ export default function LoginPage() {
       setEmailErr(true)
       setEmailErrMsg("Entered value must be a valid email address.")
 
+
     } else {
       setEmailErr(false)
       setEmailErrMsg("")
 
+
     }
   }
+
 
   const handleValidateEmail = () => {
     if ((email === "") || emailErr) {
@@ -62,6 +73,7 @@ export default function LoginPage() {
         'email': email.toLowerCase()
       })
 
+
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -72,6 +84,7 @@ export default function LoginPage() {
         },
         data: raw
       };
+
 
       axios(config).then((response) => {
         if (response.status === 200) {
@@ -88,11 +101,13 @@ export default function LoginPage() {
     }
   }
 
+
   // /////////////////////////////////////Otp code ////////////////////////////////////////////////
   const [showResendOTP, setShowResendOTP] = useState(true)
   const [counterTime, setCounterTime] = useState('00:60');
   const intervalRef = useRef(null);
   const handleResendOTP = () => {
+
 
     handleValidateEmail()
     // Clear any running interval before starting a new one
@@ -100,12 +115,15 @@ export default function LoginPage() {
       clearInterval(intervalRef.current);
     }
 
+
     let counter = 59;
     setShowResendOTP(false);
     setCounterTime(`00:${String(counter).padStart(2, '0')}`);
 
+
     intervalRef.current = setInterval(() => {
       counter--;
+
 
       if (counter < 0) {
         clearInterval(intervalRef.current);
@@ -117,60 +135,6 @@ export default function LoginPage() {
     }, 1000);
   };
 
-  const [verifyLoading, setVerifyLoading] = useState(false)
-
-  // Verify Login AFter OTP Input Complete By User
-  const verifyLogin = () => {
-    console.log("otp", otpErr, otp.length)
-    if ((otp.length < 6) || otpErr) {
-      if (otp === "") {
-        setOTPErr(true)
-        setOTPErrMsg("Otp is required.")
-      }
-      else {
-        setOTPErr(true)
-        setOTPErrMsg("Incorrect Otp length")
-      }
-    } else {
-      setVerifyLoading(true)
-
-      const raw = JSON.stringify({
-        'email': email.trim().toLowerCase(),
-        // 'otp': Number(otp),
-        'otp': otp,
-        "last_login": Math.floor(Date.now() / 1000),
-        "last_login_ip": ""
-      })
-
-      const config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `${import.meta.env.VITE_APP_API_URL}/user/verify-otp`,
-        headers: {
-          'access-token': `${import.meta.env.VITE_APP_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        data: raw
-      };
-
-      axios(config).then((response) => {
-        if (response.status === 200) {
-          console.log("response", response.data)
-          // login(response.data.token, response.data.data);
-          login("xxx1234567", response.data.results);
-          // setShowOTP(true)
-          // showToast('success', response.data.message)
-        } else {
-          showToast('failure', response.data.message)
-        }
-      }).catch((error) => {
-        const msg = error?.response?.data?.message || "Something went wrong";
-        showToast('failure', msg);
-      }).finally(() => {
-        setVerifyLoading(false)
-      });
-    }
-  }
 
   const backToLogin = () => {
     setOTP("");
@@ -181,17 +145,21 @@ export default function LoginPage() {
     setShowOTP(false)
   }
 
-  const [otp, setOTP] = useState(null)
+
+  const [otp, setOTP] = useState("");
   const [otpArr, setOTPArr] = useState([])
   const [otpErr, setOTPErr] = useState(false)
   const [otpErrMsg, setOTPErrMsg] = useState("")
 
+
   const handleOTPInput = (value) => {
     // console.log('handleOTPInput:', value);
+
 
     // if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
     setOTPArr(value)
   }
+
 
   const handleOTP = (otp) => {
     // console.log('onChange:', otp);
@@ -199,13 +167,66 @@ export default function LoginPage() {
     setOTPErr(false)
     setOTPErrMsg("")
 
+
     if (otp.length === 6 && /^\d{6}$/.test(otp)) {
       verifyLogin(otp);  // pass otp directly
     }
   };
 
+
+  const [verifyLoading, setVerifyLoading] = useState(false)
+
+
+  // Verify Login AFter OTP Input Complete By User
+  const verifyLogin = () => {
+    if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
+      setOTPErr(true);
+      setOTPErrMsg("Enter valid OTP!");
+      return;
+    }
+    setVerifyLoading(true)
+
+
+    const raw = JSON.stringify({
+      'email': email.trim().toLowerCase(),
+      'otp': otp,
+      "last_login": Math.floor(Date.now() / 1000),
+      "last_login_ip": ""
+    })
+
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${import.meta.env.VITE_APP_API_URL}/user/verify-otp`,
+      headers: {
+        'access-token': `${import.meta.env.VITE_APP_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      data: raw
+    };
+
+
+    axios(config).then((response) => {
+      if (response.status === 200) {
+        // login(response.data.token, response.data.data);
+        login("xxx1234567", response.data.results);
+        // setShowOTP(true)
+        // showToast('success', response.data.message)
+      } else {
+        showToast('failure', response.data.message)
+      }
+    }).catch((error) => {
+      const msg = error?.response?.data?.message || "Something went wrong";
+      showToast('failure', msg);
+    }).finally(() => {
+      setVerifyLoading(false)
+    });
+
+
+  }
+
   const handleEmailEdit = () => {
-    console.log("email", email)
     // setValidEmail(false)
     setShowOTP(false)
     setShowResendOTP(true)
@@ -214,6 +235,7 @@ export default function LoginPage() {
       clearInterval(intervalRef.current);
     }
   }
+
 
   return (
     <div className="login-container">
@@ -232,18 +254,24 @@ export default function LoginPage() {
           </div>
         </Col>
 
+
         {/* RIGHT HALF – FORM */}
         <Col xs={24} md={12} className="right-form-section">
           <div className="right-panel">
             <div className="login-card">
-              <img src={XapadsLogoBlack} alt="logo" className="logo" />
+              <img src={XapadsLogo} alt="logo" className="logo" />
+
 
               {!showOTP ?
                 <>
                   <h2 className="welcome">Welcome Back</h2>
                   <p className="signin-msg">Sign in to your account</p>
                   <Form layout="vertical" className="custom_form" autoComplete="new-email">
-                    <Form.Item className='m-0' label="Email Address *" name="email" validateStatus={emailErr ? 'error' : ''} help={emailErrMsg}>
+                    <Form.Item className='m-0'
+                      label="Email Address *"
+                      name="email"
+                      validateStatus={emailErr ? 'error' : ''} help={emailErrMsg}
+                    >
                       <Input className="input-box" value={email} onChange={(e) => validateEmail(e.target.value)}
                         placeholder="Enter your email" autoComplete="new-email"
                         prefix={
@@ -265,13 +293,16 @@ export default function LoginPage() {
                         }
                       />
                     </Form.Item>
-                    <Form.Item className='login_btn_cls'>
-                      <Button block type="primary" htmlType="submit" disabled={verifyLoading} onClick={handleValidateEmail}>
-                        Send Code
+                    <Form.Item className='m-0'>
+                      <Button block type="primary"
+                        htmlType="submit"
+                        disabled={verifyLoading}
+                        onClick={handleValidateEmail}
+                      >Send Code
                       </Button>
                     </Form.Item>
                   </Form>
-                  <p className="below_text">
+                  <p className="footer">
                     Having trouble with your account?{" "}
                     <a href="#" className="contact-link">Contact administrator</a>
                   </p>
@@ -280,11 +311,11 @@ export default function LoginPage() {
                 <>
                   <h2 className="welcome">Verify Your Email</h2>
                   <p className="signin-msg">Enter 6 digit code sent to your email</p>
-                  <Form name="otp_verify" className="custom_form m-0"
+                  <Form name="otp_verify" className="custom_form"
                     form={form}
-                    onFinish={verifyLogin}
+
                     autoComplete="off" layout="vertical">
-                    <div className="email-display-box pt-0">
+                    <div className="email-display-box">
                       <div className="email_display_main">
                         <span className="left-icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -300,19 +331,20 @@ export default function LoginPage() {
                       </div>
                     </div>
 
+
                     <Form.Item name="otp" label="Enter 6-digit code" validateStatus={otpErr ? 'error' : ''} help={otpErrMsg}>
-                      <Input.OTP type="number" className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} status={otpErr ? 'error' : ''} onPaste={(e) => {
-                        const pasted = e.clipboardData.getData("text");
-                        handleOTP(pasted);
-                      }} />
+                      <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} />
                     </Form.Item>
-                    <Form.Item className='login_btn_cls'>
-                      <Button block type="primary" htmlType="submit" disabled={verifyLoading}>
+                    <Form.Item className='m-0'>
+                      <Button block type="primary"
+                        htmlType="submit"
+                        disabled={verifyLoading} onClick={verifyLogin}
+                      >
                         {verifyLoading ? <img src={BtnLoader} className='img-fluid' alt="" /> : "Verify"}
                       </Button>
                     </Form.Item>
                   </Form>
-                  <p className="below_text">
+                  <p className="footer">
                     Didn't receive the code?{" "}
                     {showResendOTP ? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <><span className='resend_otp_text'>Resend OTP in </span>
                       <span className="resend_otp_btn">{counterTime}</span></>}
@@ -325,3 +357,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
+
