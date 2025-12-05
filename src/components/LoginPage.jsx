@@ -59,7 +59,7 @@ export default function LoginPage() {
           //  return 0;
             setShowLoading(true)
             const raw = JSON.stringify({
-                'email': email.toLowerCase()
+              'email': email.toLowerCase()
             })
 
             const config = {
@@ -74,12 +74,12 @@ export default function LoginPage() {
             };
 
             axios(config).then((response) => {
-                if (response.status === 200) {
-                    setShowOTP(true)
-                    showToast('success', response.data.message)
-                } else {
-                    showToast('failure', response.data.message)
-                }
+              if (response.status === 200) {
+                  setShowOTP(true)
+                  showToast('success', response.data.message)
+              } else {
+                  showToast('failure', response.data.message)
+              }
             }).catch((error) => {
                 showToast('failure', error.response.data.message)
             }).finally(() => {
@@ -117,26 +117,51 @@ export default function LoginPage() {
         }, 1000);
     };
 
+    const backToLogin = () => {
+      setOTP("");
+      setOTPErr(false)
+      setOTPErrMsg("")
+      setVerifyLoading(false)
+      form.resetFields()
+      setShowOTP(false)
+    }
+
+    const [otp, setOTP] = useState("");
+    const [otpArr, setOTPArr] = useState([])
+    const [otpErr, setOTPErr] = useState(false)
+    const [otpErrMsg, setOTPErrMsg] = useState("")
+
+    const handleOTPInput = (value) => {
+        // console.log('handleOTPInput:', value);
+
+        // if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
+        setOTPArr(value)
+    }
+
+    const handleOTP = (otp) => {
+        // console.log('onChange:', otp);
+      setOTP(otp)
+      setOTPErr(false)
+      setOTPErrMsg("")
+
+      if (otp.length === 6 && /^\d{6}$/.test(otp)) {
+        verifyLogin(otp);  // pass otp directly
+      }
+    };
+
     const [verifyLoading, setVerifyLoading] = useState(false)
 
     // Verify Login AFter OTP Input Complete By User
     const verifyLogin = () => {
-      console.log("otp", otpErr, otp.length)
-      if ((otp.length < 6) || otpErr) {
-        if (otp === "") {
-          setOTPErr(true)
-          setOTPErrMsg("Otp is required.")
-        }
-        else {
-          setOTPErr(true)
-          setOTPErrMsg("Incorrect Otp length")
-        }
-      } else {
-          setVerifyLoading(true)
+      if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
+        setOTPErr(true);
+        setOTPErrMsg("Enter valid OTP!");
+        return;
+      }
+        setVerifyLoading(true)
 
           const raw = JSON.stringify({
             'email': email.trim().toLowerCase(),
-            // 'otp': Number(otp),
             'otp': otp,
             "last_login": Math.floor(Date.now() / 1000),
             "last_login_ip": ""
@@ -155,7 +180,6 @@ export default function LoginPage() {
 
           axios(config).then((response) => {
             if (response.status === 200) {
-              console.log("response", response.data)
                 // login(response.data.token, response.data.data);
                 login("xxx1234567", response.data.results);
                 // setShowOTP(true)
@@ -169,43 +193,11 @@ export default function LoginPage() {
           }).finally(() => {
               setVerifyLoading(false)
           });
-      }
+      
+      
     }
-
-    const backToLogin = () => {
-      setOTP("");
-      setOTPErr(false)
-      setOTPErrMsg("")
-      setVerifyLoading(false)
-      form.resetFields()
-      setShowOTP(false)
-    }
-
-    const [otp, setOTP] = useState(null)
-    const [otpArr, setOTPArr] = useState([])
-    const [otpErr, setOTPErr] = useState(false)
-    const [otpErrMsg, setOTPErrMsg] = useState("")
-
-    const handleOTPInput = (value) => {
-        // console.log('handleOTPInput:', value);
-
-        // if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
-        setOTPArr(value)
-    }
-
-    const handleOTP = (otp) => {
-        // console.log('onChange:', otp);
-        setOTP(otp)
-        setOTPErr(false)
-        setOTPErrMsg("")
-
-        if (otp.length === 6 && /^\d{6}$/.test(otp)) {
-            verifyLogin(otp);  // pass otp directly
-        }
-    };
     
     const handleEmailEdit = () => {
-      console.log("email", email)
       // setValidEmail(false)
       setShowOTP(false)
       setShowResendOTP(true)
@@ -217,7 +209,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
-    <Row className="login-wrapper">
+      <Row className="login-wrapper">
       
       {/* LEFT HALF – IMAGE */}
       <Col xs={0} md={12} className="left-image-section">
@@ -289,7 +281,7 @@ export default function LoginPage() {
             <p className="signin-msg">Enter 6 digit code sent to your email</p>
             <Form name="otp_verify" className="custom_form"
               form={form}
-              onFinish={verifyLogin}
+              
               autoComplete="off" layout="vertical">
                 <div className="email-display-box">
                   <div className="email_display_main">
@@ -308,15 +300,12 @@ export default function LoginPage() {
                 </div>
 
                 <Form.Item name="otp" label="Enter 6-digit code" validateStatus={otpErr ? 'error' : ''} help={otpErrMsg}>
-                  <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} status={otpErr ? 'error' : ''}  onPaste={(e) => {
-    const pasted = e.clipboardData.getData("text");
-    handleOTP(pasted);
-  }} />
+                  <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} />
                 </Form.Item>    
                 <Form.Item className='m-0'>
                   <Button block type="primary"
                     htmlType="submit"
-                    disabled={verifyLoading}
+                    disabled={verifyLoading} onClick={verifyLogin}
                   >
                     {verifyLoading ? <img src={BtnLoader} className='img-fluid' alt="" /> : "Verify"}
                   </Button>
