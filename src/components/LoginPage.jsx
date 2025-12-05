@@ -327,7 +327,7 @@ export default function LoginPage() {
                     </Form.Item>
                     <Form.Item className='login_btn_cls'>
                       <Button block type="primary" htmlType="submit" disabled={verifyLoading} onClick={verifyLogin}>
-                        {verifyLoading ? <img src={BtnLoader} className='img-fluid' alt="" /> : "Verify"}
+                        {verifyLoading ? <img src={BtnLoader} className='btn_loader_img img-fluid' alt="" /> : "Verify"}
                       </Button>
                     </Form.Item>
                   </Form>

@@ -346,7 +346,7 @@ export default function XiaomiRTBReport() {
               <Table
                 columns={columns}
                 dataSource={filteredData}
-                scroll={{ y: "calc(100dvh - 32rem)" }}
+                scroll={{ y: "calc(100dvh - 30.2rem)" }}
                 pagination={{
                   showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
                   defaultPageSize: 20,   // 👈 ensures initial load = 20
@@ -356,65 +356,14 @@ export default function XiaomiRTBReport() {
 
                   selectProps: {
                     showSearch: false,
+                    filterOption: false,
                     optionFilterProp: null
-                  }
+                  },
+                  locale: {
+                    items_per_page: '',   // remove " / page"
+                  },
                 }} />
-              {/* <div className="d-flex align-items-center justify-content-between custom_pagination_design_cls">
-                <Col span={12}>
-                  <div className="d-flex align-items-center justify-content-between w-100">
-                    <div className="dropdown_select_pagination">
-                      <Select
-                        defaultValue="10"
-                        onChange={handleChange}
-                        // open={true}
-                        options={[
-                          { value: '10', label: '10' },
-                          { value: '20', label: '20' },
-                          { value: '30', label: '30' },
-                          { value: '40', label: '40' },
-                        ]}
-                        suffixIcon={
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                            <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="#475467" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                          </svg>
-                        }
-                      />
-                      <p> 197 records</p>
-                    </div>
-                    <div>
-                      <p><strong>1-10</strong> of 197 records</p>
-                    </div>
-                  </div>
-                </Col>
-                <Col span={12}>
 
-                  <div className="new_custom_pagination_design">
-                    <Pagination
-                      defaultCurrent={6}
-                      total={500}
-                      className="custom_pagination"
-                      showSizeChanger={false}
-                      itemRender={(page, type, originalElement) => {
-                        if (type === "prev") {
-                          return <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                              <path d="M4.64844 0.649902L0.648437 4.6499L4.64844 8.6499" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                          </a>;
-                        }
-                        if (type === "next") {
-                          return <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                              <path d="M6 12L10 8L6 4" stroke="#514F6E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                          </a>;
-                        }
-                        return originalElement;
-                      }}
-                    />
-                  </div>
-                </Col>
-              </div> */}
             </div>
           </div>
         }

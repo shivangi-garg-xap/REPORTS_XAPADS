@@ -36,6 +36,12 @@
             }
         }
 
+        thead tr th.ant-table-column-has-sorters {
+            &:hover {
+                background-color: #F9FAFD;
+            }
+        }
+
         tbody tr td {
             padding: 1.2rem 2rem;
             color: $Gray-85;
