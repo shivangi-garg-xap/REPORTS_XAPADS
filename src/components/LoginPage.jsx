@@ -155,41 +155,48 @@ export default function LoginPage() {
   const handleOTPInput = (value) => {
     // console.log('handleOTPInput:', value);
 
-
     // if (!/^\d{0,6}$/.test(value)) return; // Allow only digits up to 6 characters
     setOTPArr(value)
   }
 
-
-  const handleOTP = (otp) => {
-    // console.log('onChange:', otp);
-    setOTP(otp)
-    setOTPErr(false)
-    setOTPErrMsg("")
-
-
-    if (otp.length === 6 && /^\d{6}$/.test(otp)) {
-      verifyLogin(otp);  // pass otp directly
+  const handleOTPChange = (value) => {
+    setOTP(value);
+    setOTPErr(false);
+    setOTPErrMsg("");
+    
+    if (value.length === 6 && /^\d{6}$/.test(value)) {
+      verifyLogin(value);
     }
   };
 
+  const handleOTPPaste = (e) => {
+    const paste = e.clipboardData.getData("text").trim();
+
+  // Only accept 6-digit number
+    if (/^\d{6}$/.test(paste)) {
+      e.preventDefault();
+      setOTP(paste);
+      setOTPErr(false);
+      setOTPErrMsg("");
+      verifyLogin(paste);  
+    }
+  };
 
   const [verifyLoading, setVerifyLoading] = useState(false)
 
-
   // Verify Login AFter OTP Input Complete By User
-  const verifyLogin = () => {
-    if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
+  const verifyLogin = (otpValue) => {
+    if (!otpValue || otpValue.length !== 6) {
       setOTPErr(true);
       setOTPErrMsg("Enter valid OTP!");
       return;
     }
+    
     setVerifyLoading(true)
-
 
     const raw = JSON.stringify({
       'email': email.trim().toLowerCase(),
-      'otp': otp,
+      'otp': otpValue,
       "last_login": Math.floor(Date.now() / 1000),
       "last_login_ip": ""
     })
@@ -323,7 +330,7 @@ export default function LoginPage() {
                       </div>
                     </div>
                     <Form.Item name="otp" label="Enter 6-digit code" validateStatus={otpErr ? 'error' : ''} help={otpErrMsg}>
-                      <Input.OTP type="number" className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} />
+                      <Input.OTP type="number" className="otp_input_box" onChange={handleOTPChange} value={otp} handleOTPPaste={handleOTPPaste} status={otpErr ? "error" : ""} />
                     </Form.Item>
                     <Form.Item className='login_btn_cls'>
                       <Button block type="primary" htmlType="submit" disabled={verifyLoading} onClick={verifyLogin}>
