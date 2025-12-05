@@ -4,7 +4,7 @@ import { Row, Col, Form, Input, Button } from "antd";
 import BtnLoader from '../assets/btn_loader.gif'
 
 
-import XapadsLogo from "../assets/XapadsLogo.svg"
+import XapadsLogoBlack from "../assets/xapads_logo_black.svg"
 import axios from "axios";
 
 
@@ -259,7 +259,7 @@ export default function LoginPage() {
         <Col xs={24} md={12} className="right-form-section">
           <div className="right-panel">
             <div className="login-card">
-              <img src={XapadsLogo} alt="logo" className="logo" />
+              <img src={XapadsLogoBlack} alt="logo" className="logo" />
 
 
               {!showOTP ?
@@ -267,11 +267,7 @@ export default function LoginPage() {
                   <h2 className="welcome">Welcome Back</h2>
                   <p className="signin-msg">Sign in to your account</p>
                   <Form layout="vertical" className="custom_form" autoComplete="new-email">
-                    <Form.Item className='m-0'
-                      label="Email Address *"
-                      name="email"
-                      validateStatus={emailErr ? 'error' : ''} help={emailErrMsg}
-                    >
+                    <Form.Item className='m-0' label="Email Address *" name="email" validateStatus={emailErr ? 'error' : ''} help={emailErrMsg}>
                       <Input className="input-box" value={email} onChange={(e) => validateEmail(e.target.value)}
                         placeholder="Enter your email" autoComplete="new-email"
                         prefix={
@@ -293,16 +289,13 @@ export default function LoginPage() {
                         }
                       />
                     </Form.Item>
-                    <Form.Item className='m-0'>
-                      <Button block type="primary"
-                        htmlType="submit"
-                        disabled={verifyLoading}
-                        onClick={handleValidateEmail}
-                      >Send Code
+                    <Form.Item className='login_btn_cls'>
+                      <Button block type="primary" htmlType="submit" disabled={verifyLoading} onClick={handleValidateEmail}>
+                        Send Code
                       </Button>
                     </Form.Item>
                   </Form>
-                  <p className="footer">
+                  <p className="below_text">
                     Having trouble with your account?{" "}
                     <a href="#" className="contact-link">Contact administrator</a>
                   </p>
@@ -311,11 +304,10 @@ export default function LoginPage() {
                 <>
                   <h2 className="welcome">Verify Your Email</h2>
                   <p className="signin-msg">Enter 6 digit code sent to your email</p>
-                  <Form name="otp_verify" className="custom_form"
+                  <Form name="otp_verify" className="custom_form m-0"
                     form={form}
-
                     autoComplete="off" layout="vertical">
-                    <div className="email-display-box">
+                    <div className="email-display-box pt-0">
                       <div className="email_display_main">
                         <span className="left-icon">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -330,21 +322,16 @@ export default function LoginPage() {
                         </svg>
                       </div>
                     </div>
-
-
                     <Form.Item name="otp" label="Enter 6-digit code" validateStatus={otpErr ? 'error' : ''} help={otpErrMsg}>
-                      <Input.OTP className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} />
+                      <Input.OTP type="number" className="otp_input_box" onInput={handleOTPInput} onChange={handleOTP} />
                     </Form.Item>
-                    <Form.Item className='m-0'>
-                      <Button block type="primary"
-                        htmlType="submit"
-                        disabled={verifyLoading} onClick={verifyLogin}
-                      >
+                    <Form.Item className='login_btn_cls'>
+                      <Button block type="primary" htmlType="submit" disabled={verifyLoading} onClick={verifyLogin}>
                         {verifyLoading ? <img src={BtnLoader} className='img-fluid' alt="" /> : "Verify"}
                       </Button>
                     </Form.Item>
                   </Form>
-                  <p className="footer">
+                  <p className="below_text">
                     Didn't receive the code?{" "}
                     {showResendOTP ? <a className='resend_otp_btn' onClick={handleResendOTP}>Resend OTP</a> : <><span className='resend_otp_text'>Resend OTP in </span>
                       <span className="resend_otp_btn">{counterTime}</span></>}
@@ -357,5 +344,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
